@@ -638,6 +638,12 @@ fn getLinesChanged(
                     try q.push(allocator, item);
                 }
             },
+            .not_found => {
+                std.log.info(
+                    "Skipping lines changed for {s} because GitHub returned Not Found.",
+                    .{item.repo.name},
+                );
+            },
             else => |status| {
                 std.log.info(
                     "Failed to get contribution data for {s} ({?s})",
